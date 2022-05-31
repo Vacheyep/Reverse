@@ -12,10 +12,10 @@ public class Address {
     private Long id;
 
     @Column(name = "address")
-    String address;
+     String address;
 
-    @OneToMany(mappedBy = "address")
-    List<User> users;
+//    @OneToMany(mappedBy = "address")
+//    List<User> users;
 
 
     public Long getId() {
