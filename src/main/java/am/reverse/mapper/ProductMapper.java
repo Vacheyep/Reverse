@@ -1,24 +1,39 @@
 package am.reverse.mapper;
 
-import am.reverse.dto.ProductDto;
+import am.reverse.dto.product.ProductDtoForAdmin;
+import am.reverse.dto.product.ProductDtoForGuest;
+import am.reverse.dto.product.ProductDtoForUser;
 import am.reverse.entities.Product;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ProductMapper {
-    public Product toProduct(ProductDto productDto){
+    public Product toProductForGuest(ProductDtoForGuest productDtoForGuest){
         Product product = new Product();
-        product.setName(productDto.getName());
-        product.setDescription(productDto.getDescription());
-        product.setMeasure(productDto.getMeasure());
+        product.setName(productDtoForGuest.getName());
+        product.setDescription(productDtoForGuest.getDescription());
+        product.setReverseCoin(productDtoForGuest.getReverseCoin());
+
         return product;
     }
 
-    public ProductDto toProductDto(Product product){
-        ProductDto productDto = new ProductDto();
-        productDto.setName(product.getName());
-        productDto.setDescription(product.getDescription());
-        productDto.setMeasure(product.getMeasure());
-        return productDto;
+    public ProductDtoForGuest toProductDtoForGuest(Product product){
+        ProductDtoForGuest productDtoForGuest = new ProductDtoForGuest();
+        productDtoForGuest.setName(product.getName());
+        productDtoForGuest.setDescription(product.getDescription());
+        productDtoForGuest.setReverseCoin(product.getReverseCoin());
+        return productDtoForGuest;
     }
+//    public Product toProductForUser(ProductDtoForUser productDtoForUser){
+//
+//    }
+//    public ProductDtoForUser toProductDtoForUser(Product product){
+//
+//    }
+//    public Product toProductForAdmin(ProductDtoForAdmin productDtoForAdmin){
+//
+//    }
+//    public ProductDtoForAdmin toProductDtoForAdmin(Product product){
+//
+//    }
 }

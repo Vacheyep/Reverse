@@ -1,44 +1,48 @@
 package am.reverse.entities;
 
-import am.reverse.enums.ProductType;
+import am.reverse.enums.ProductCondition;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "location")
-    String location;
+    private String location;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "product_type")
-    ProductType productType;
+    @ManyToOne
+    @JoinColumn(name = "id_product_type", foreignKey = @ForeignKey(name = "product_productType_fk"))
+    private ProductType productType;
 
     @Column(name = "reverse_coin")
-    Long reverseCoin;
+    private Long reverseCoin;
 
-    @Column(name = "description")
-    String description;
+    @Column(name = "descriptions")
+    private String descriptions;
 
-    @Column(name = "measure")
-    String measure;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "conditions")
+    private ProductCondition productCondition;
+
 
     @Column(name = "count")
-    Long count;
-
+    private Long count;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    User user;
+    @JoinColumn(name = "bag_id",
+            foreignKey = @ForeignKey(name = "bag_product_fk"))
+    private Bag bag;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "product_user_fk"))
+    private User user;
 
 //    @OneToMany(mappedBy = "product")
 //    List<Factory> factoryList;
@@ -59,19 +63,35 @@ public class Product {
     }
 
     public String getDescription() {
-        return description;
+        return descriptions;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.descriptions = description;
     }
 
-    public String getMeasure() {
-        return measure;
+    public String getLocation() {
+        return location;
     }
 
-    public void setMeasure(String measure) {
-        this.measure = measure;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    public ProductCondition getProductCondition() {
+        return productCondition;
+    }
+
+    public void setProductCondition(ProductCondition productCondition) {
+        this.productCondition = productCondition;
     }
 
     public Long getCount() {
